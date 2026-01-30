@@ -1,3 +1,4 @@
+// @ts-ignore - bullmq doesn't have type definitions
 import { Queue, Worker, Job as BullJob, QueueEvents } from 'bullmq';
 import { redis } from '../config/redis';
 import { logger } from '../utils/logger';
@@ -48,7 +49,7 @@ export class JobQueueService {
   }
 
   private setupEventHandlers(): void {
-    this.worker.on('completed', (job) => {
+    this.worker.on('completed', (job: any) => {
       logger.info('Job completed', {
         jobId: job.id,
         jobType: job.name,
@@ -56,7 +57,7 @@ export class JobQueueService {
       });
     });
 
-    this.worker.on('failed', (job, err) => {
+    this.worker.on('failed', (job: any, err: Error) => {
       logger.error('Job failed', {
         jobId: job?.id,
         jobType: job?.name,
@@ -65,7 +66,7 @@ export class JobQueueService {
       });
     });
 
-    this.worker.on('error', (err) => {
+    this.worker.on('error', (err: Error) => {
       logger.error('Worker error', { error: err.message });
     });
   }

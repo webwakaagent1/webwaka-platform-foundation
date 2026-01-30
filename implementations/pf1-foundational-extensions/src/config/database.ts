@@ -1,18 +1,27 @@
 import { Pool, PoolConfig } from 'pg';
 import { logger } from '../utils/logger';
 
-const poolConfig: PoolConfig = {
-  host: process.env.DB_HOST || 'localhost',
-  port: parseInt(process.env.DB_PORT || '5432'),
-  database: process.env.DB_NAME || 'webwaka_pf1',
-  user: process.env.DB_USER || 'postgres',
-  password: process.env.DB_PASSWORD || 'postgres',
-  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
-  min: parseInt(process.env.DB_POOL_MIN || '2'),
-  max: parseInt(process.env.DB_POOL_MAX || '10'),
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 10000,
-};
+const poolConfig: PoolConfig = process.env.DATABASE_URL
+  ? {
+      connectionString: process.env.DATABASE_URL,
+      ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
+      min: parseInt(process.env.DB_POOL_MIN || '2'),
+      max: parseInt(process.env.DB_POOL_MAX || '10'),
+      idleTimeoutMillis: 30000,
+      connectionTimeoutMillis: 10000,
+    }
+  : {
+      host: process.env.PGHOST || process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.PGPORT || process.env.DB_PORT || '5432'),
+      database: process.env.PGDATABASE || process.env.DB_NAME || 'webwaka_pf1',
+      user: process.env.PGUSER || process.env.DB_USER || 'postgres',
+      password: process.env.PGPASSWORD || process.env.DB_PASSWORD || 'postgres',
+      ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
+      min: parseInt(process.env.DB_POOL_MIN || '2'),
+      max: parseInt(process.env.DB_POOL_MAX || '10'),
+      idleTimeoutMillis: 30000,
+      connectionTimeoutMillis: 10000,
+    };
 
 export const pool = new Pool(poolConfig);
 
