@@ -7,19 +7,8 @@ jest.mock('../../src/config/database');
 jest.mock('../../src/services/AuditLogService');
 
 describe('InstanceOrchestrationService', () => {
-  let instanceService: InstanceOrchestrationService;
-  let mockActor: Actor;
-
-  beforeEach(() => {
-    instanceService = new InstanceOrchestrationService();
-    mockActor = {
-      id: 'admin-123',
-      type: 'super-admin',
-      email: 'admin@webwaka.com',
-      ipAddress: '192.168.1.1',
-      userAgent: 'Mozilla/5.0',
-    };
-  });
+  // Service would be initialized here in real implementation
+  // Currently these tests are placeholders that verify data structures
 
   describe('createInstance', () => {
     it('should create an instance with valid input', async () => {
@@ -110,11 +99,10 @@ describe('InstanceOrchestrationService', () => {
     });
 
     it('should support pagination', async () => {
-      const filter = {};
       const limit = 50;
       const offset = 100;
 
-      // Mock database response
+      // Mock database response with pagination
       expect(limit).toBe(50);
       expect(offset).toBe(100);
     });
@@ -130,7 +118,6 @@ describe('InstanceOrchestrationService', () => {
 
   describe('updateInstance', () => {
     it('should update instance configuration', async () => {
-      const instanceId = 'instance-123';
       const input = {
         name: 'updated-name',
         configuration: {
@@ -144,7 +131,6 @@ describe('InstanceOrchestrationService', () => {
     });
 
     it('should update instance resources', async () => {
-      const instanceId = 'instance-123';
       const input = {
         resources: {
           cpu: '4.0',
@@ -159,14 +145,12 @@ describe('InstanceOrchestrationService', () => {
 
   describe('updateInstanceStatus', () => {
     it('should update instance status', async () => {
-      const instanceId = 'instance-123';
       const status = 'suspended';
 
       expect(status).toBe('suspended');
     });
 
     it('should create audit log for status change', async () => {
-      const instanceId = 'instance-123';
       const status = 'active';
 
       // Verify audit log would be created

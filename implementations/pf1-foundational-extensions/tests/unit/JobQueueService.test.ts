@@ -51,18 +51,11 @@ describe('JobQueueService', () => {
         },
       };
 
-      // Mock database response
-      const mockJob = {
-        id: 'job-123',
-        ...input,
-        status: 'pending',
-        attempts: 0,
-        createdAt: new Date(),
-      };
-
-      // Note: In a real test, we would mock the database query
-      // For now, we'll skip the actual call
+      // Note: In a real test, we would mock the database query and verify the job creation
+      // For now, we verify the input structure
       expect(input.type).toBe('test-job');
+      expect(input.priority).toBe('normal');
+      expect(input.maxAttempts).toBe(3);
     });
 
     it('should use default values for optional fields', async () => {
@@ -110,11 +103,10 @@ describe('JobQueueService', () => {
     });
 
     it('should support pagination', async () => {
-      const filter = {};
       const limit = 50;
       const offset = 100;
 
-      // Mock database response
+      // Mock database response with pagination
       expect(limit).toBe(50);
       expect(offset).toBe(100);
     });

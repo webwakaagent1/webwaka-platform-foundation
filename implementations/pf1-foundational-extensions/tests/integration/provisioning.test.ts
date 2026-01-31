@@ -4,23 +4,8 @@ import { CreateInstanceInput } from '../../src/models/Instance';
 import { Actor } from '../../src/models/AuditLog';
 
 describe('Instance Provisioning Integration Test', () => {
-  let instanceService: InstanceOrchestrationService;
-  let auditLogService: AuditLogService;
-  let mockActor: Actor;
-
-  beforeAll(() => {
-    // Initialize services
-    instanceService = new InstanceOrchestrationService();
-    auditLogService = new AuditLogService();
-
-    mockActor = {
-      id: 'admin-123',
-      type: 'super-admin',
-      email: 'admin@webwaka.com',
-      ipAddress: '192.168.1.1',
-      userAgent: 'Mozilla/5.0',
-    };
-  });
+  // Services would be initialized here in real implementation
+  // Currently these tests are placeholders that verify data structures
 
   describe('Complete Provisioning Workflow', () => {
     it('should provision a new instance end-to-end', async () => {
@@ -83,8 +68,6 @@ describe('Instance Provisioning Integration Test', () => {
 
   describe('Instance Lifecycle Management', () => {
     it('should support full instance lifecycle', async () => {
-      const instanceId = 'instance-123';
-
       // Lifecycle states
       const states = [
         'provisioning',
@@ -114,7 +97,6 @@ describe('Instance Provisioning Integration Test', () => {
 
   describe('Configuration Updates', () => {
     it('should update instance configuration', async () => {
-      const instanceId = 'instance-123';
       const updates = {
         configuration: {
           enabledCapabilities: ['pos', 'inventory', 'analytics'],
@@ -125,7 +107,6 @@ describe('Instance Provisioning Integration Test', () => {
     });
 
     it('should update instance resources', async () => {
-      const instanceId = 'instance-123';
       const updates = {
         resources: {
           cpu: '4.0',
@@ -139,8 +120,6 @@ describe('Instance Provisioning Integration Test', () => {
 
   describe('Health Monitoring', () => {
     it('should track instance health', async () => {
-      const instanceId = 'instance-123';
-      
       const expectedHealth = {
         lastHealthCheck: new Date(),
         status: 'healthy',
