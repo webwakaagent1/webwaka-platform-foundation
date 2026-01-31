@@ -1,0 +1,21 @@
+{
+  "name": "pf3-ai-high-complexity-readiness",
+  "version": "1.0.0",
+  "description": "**Phase:** PF-3 (Platform Foundation - Wave 3)   **Status:** Implementation Complete   **Date:** January 30, 2026",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^25.1.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
+}
